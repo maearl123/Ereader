@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EPUB.js Viewer</title>
+  <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+  <style>
+    #viewer {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="viewer"></div>
+  <script>
+    // Initialize EPUB.js
+    const urlParams = new URLSearchParams(window.location.search);
+    const file = urlParams.get('file'); // Get EPUB file URL from query string
+
+    if (file) {
+      const book = ePub(file);
+      const rendition = book.renderTo("viewer", {
+        width: "100%",
+        height: "100vh"
+      });
+
+      rendition.display();
+    } else {
+      document.getElementById("viewer").innerText = "No EPUB file provided.";
+    }
+  </script>
+</body>
+</html>
